@@ -1,18 +1,28 @@
-//
-//  ViewController.swift
-//  homework8_1
-//
-//  Created by MikeWu on 2016/5/4.
-//  Copyright © 2016年 Mike. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var labelResult: UILabel!
+    var sum = 0
+    
+    func countIncrease() {
+        sum = sum + 2
+        labelResult.text = String(sum)
+    }
+    
+    func countDecrese() {
+        sum = sum - 1
+        labelResult.text = String(sum)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.countDecrese), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.countIncrease), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
